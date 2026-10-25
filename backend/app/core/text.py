@@ -1,7 +1,9 @@
 import html
 import re
 
+# Qualquer tag HTML, como <b> ou </a>.
 _TAG = re.compile(r"<[^>]+>")
+# Sequência de espaços, tabs ou quebras de linha.
 _SPACES = re.compile(r"\s+")
 
 

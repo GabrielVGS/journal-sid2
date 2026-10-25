@@ -31,7 +31,9 @@ MONTHS_EN = [
     "December",
 ]
 
+# Título de nível 2, ex.: "== April 5, 2002 ==". Grupo: o texto do título.
 _LEVEL2_HEADING = re.compile(r"^==([^=].*?)==\s*$", re.MULTILINE)
+# Conteúdo da seção "== Events ==" até o próximo título de nível 2 ou o fim.
 _EVENTS_SECTION = re.compile(r"^==\s*Events\s*==\s*$(.*?)(?=^==[^=]|\Z)", re.MULTILINE | re.DOTALL)
 
 
@@ -77,6 +79,7 @@ def _bullets(wikitext: str) -> list[tuple[str, tuple[str, ...]]]:
 
 
 def month_article_day(wikitext: str, day: date) -> str:
+    # Título do dia na página do mês, ex.: "April 5, 2002 (Friday)".
     pattern = re.compile(rf"\b{MONTHS_EN[day.month - 1]}\s+{day.day}\b.*\b{day.year}\b")
     headings = list(_LEVEL2_HEADING.finditer(wikitext))
     for index, heading in enumerate(headings):
@@ -89,6 +92,8 @@ def month_article_day(wikitext: str, day: date) -> str:
 def year_article_day(wikitext: str, day: date) -> str:
     section = _EVENTS_SECTION.search(wikitext)
     wikitext = section.group(1) if section else ""
+    # Item da página do ano com o link do dia, ex.: "* [[April 5]] – texto".
+    # Grupo: o texto (vazio quando os eventos vêm nos subitens "**").
     date_link = re.compile(
         rf"^\*\s*\[\[{MONTHS_EN[day.month - 1]} {day.day}\]\]\s*(?:[–—:-]\s*)?(.*)$"
     )

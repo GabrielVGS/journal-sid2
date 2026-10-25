@@ -33,13 +33,22 @@ logger = logging.getLogger(__name__)
 
 MONTHS = {name: number for number, name in enumerate(dates.MONTH_NAMES, start=1)}
 
+# Referências do wikitext: <ref name=x /> ou <ref>...</ref>.
 _REF = re.compile(r"<ref[^>/]*/>|<ref[^>]*>.*?</ref>", re.DOTALL | re.IGNORECASE)
+# Comentários HTML <!-- ... -->.
 _COMMENT = re.compile(r"<!--.*?-->", re.DOTALL)
+# Conteúdo da seção "== Eventos ==" até o próximo título de nível 2 ou o fim.
 _SECTION = re.compile(r"^==\s*Eventos\s*==\s*$(.*?)(?=^==[^=]|\Z)", re.MULTILINE | re.DOTALL)
+# Subtítulo com o nome do mês, ex.: "=== Julho ===". Grupo: o mês.
 _MONTH_HEADING = re.compile(r"^===+\s*([A-Za-zçÇ]+)\s*===+\s*$")
+# Link de data: [[20 de julho]] ou [[1º de julho|1º]]. Grupos: dia e mês.
 _DATE_LINK = re.compile(r"\[\[(\d{1,2})(?:º|\.º)? de ([a-zç]+)(?:\|[^\]]*)?\]\]", re.IGNORECASE)
+# Item de lista que começa com links de data, ex.: "* [[1 de julho]]: texto".
+# Grupos: os asteriscos (nível), os links de data e o texto depois de ":" ou "–".
 _DATED_LINE = re.compile(r"^(\*+)\s*((?:\[\[[^\]]+\]\][\s,e]*)+?)\s*(?:[:\-–—]\s*|$)(.*)$")
+# Frase que começa com "Em março". Grupo: o mês.
 _IN_MONTH = re.compile(r"^Em ([a-zç]+)\b", re.IGNORECASE)
+# Data sem link no começo do item, ex.: "1º de julho: texto". Grupos: dia, mês e texto.
 _PLAIN_DATE = re.compile(r"^(\d{1,2})(?:º|\.º)? de ([a-zç]+)\s*[:\-–—]\s*(.*)$", re.IGNORECASE)
 
 
@@ -94,6 +103,7 @@ def parse_feed(raw: dict[str, Any], day: date) -> list[RawEvent]:
 
 
 MAX_PEOPLE = 8
+# Menção ao Brasil: palavras que começam com "brasil" ou "brasileir".
 _BRAZIL = re.compile(r"\bbrasil|\bbrasileir", re.IGNORECASE)
 
 PeopleKind = Literal["births", "deaths"]

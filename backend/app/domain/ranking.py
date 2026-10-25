@@ -13,6 +13,7 @@ BRAZIL_BONUS = 1.0
 SELECTED_BONUS = 0.5
 MAX_ON_THIS_DAY = 12
 
+# Menção ao Brasil: palavras que começam com "brasil" ou "brasileir".
 _BRAZIL = re.compile(r"\bbrasil|\bbrasileir", re.IGNORECASE)
 _GENERIC_LINKS = frozenset({"Brasil", "Estados Unidos", "Portugal"})
 

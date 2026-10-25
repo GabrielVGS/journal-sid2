@@ -1,6 +1,7 @@
 import { useId } from 'react'
 
 export function FoldedNewspaper({ className = 'w-56' }: { className?: string }) {
+  // O id do React tem ":", que não vale em url(#id) do SVG.
   const id = useId().replace(/:/g, '')
   const hatch = `hatch-${id}`
   const cross = `cross-${id}`

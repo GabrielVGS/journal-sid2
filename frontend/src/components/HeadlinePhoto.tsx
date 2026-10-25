@@ -5,6 +5,7 @@ import { isTranslated } from '../util/events'
 const SHARPER = 500
 
 function sharper(url: string): string {
+  // Miniatura da Wikimedia tem a largura na URL ("/320px-"); troca por uma maior.
   return url.replace(/\/(\d+)px-/, (match, width: string) =>
     Number(width) < SHARPER ? `/${SHARPER}px-` : match,
   )

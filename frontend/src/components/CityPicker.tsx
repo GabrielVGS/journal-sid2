@@ -25,10 +25,13 @@ const STATE_NAMES: Record<string, string> = {
 }
 
 function normalize(text: string): string {
-  return text
-    .normalize('NFD')
-    .replace(/\p{Diacritic}/gu, '')
-    .toLowerCase()
+  return (
+    text
+      .normalize('NFD')
+      // Remove os acentos separados pelo NFD, para "sao" achar "São".
+      .replace(/\p{Diacritic}/gu, '')
+      .toLowerCase()
+  )
 }
 
 // Campo de cidade: filtra as sugeridas e busca as demais na API.

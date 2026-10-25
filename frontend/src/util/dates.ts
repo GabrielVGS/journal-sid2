@@ -1,5 +1,6 @@
 export const MIN_DATE = '1900-01-01'
 const TIMEZONE = 'America/Sao_Paulo'
+// Formato AAAA-MM-DD.
 const ISO_DATE = /^\d{4}-\d{2}-\d{2}$/
 
 // Último dia permitido, no fuso de São Paulo, como no servidor.

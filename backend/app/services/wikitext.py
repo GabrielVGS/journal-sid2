@@ -10,6 +10,8 @@ from app.core.http import get_json
 PARSE_URL = "https://{lang}.wikipedia.org/w/api.php"
 ARTICLE_URL = "https://{lang}.wikipedia.org/wiki/"
 
+# Link de data em wikitext: [[20 de julho]], [[1º de julho]] ou [[1 de julho|1º]].
+# Grupos: dia e nome do mês.
 _DATE_LINK = re.compile(r"\[\[(\d{1,2})(?:º|\.º)? de ([a-zç]+)(?:\|[^\]]*)?\]\]", re.IGNORECASE)
 _NAMESPACES = ("ficheiro:", "arquivo:", "imagem:", "file:", "image:", "categoria:", "category:")
 
@@ -54,5 +56,6 @@ def clean_wikitext(fragment: str) -> tuple[str, tuple[str, ...]]:
             if not _DATE_LINK.fullmatch(f"[[{title}]]") and not title.isdigit()
         )
     )
+    # Junta espaços e quebras de linha num espaço só e tira pontuação das pontas.
     text = re.sub(r"\s+", " ", code.strip_code()).strip(" .;-–")
     return text[:1].upper() + text[1:], links

@@ -18,6 +18,7 @@ MAX_DESCRIPTION = 200
 
 # Marcadores no index.html onde as tags Open Graph são inseridas.
 _BLOCK = re.compile(r"<!-- og -->.*?<!-- /og -->", re.DOTALL)
+# Caminho de uma capa: c/AAAA-MM-DD, com barra final opcional. Grupo: a data.
 _EDITION_PATH = re.compile(r"^c/(\d{4}-\d{2}-\d{2})/?$")
 
 
