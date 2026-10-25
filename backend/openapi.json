@@ -1,0 +1,1588 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "O Jornal do Dia",
+    "version": "0.1.0"
+  },
+  "paths": {
+    "/api/front-page": {
+      "get": {
+        "tags": [
+          "front page"
+        ],
+        "summary": "Get Front Page",
+        "operationId": "get_front_page_api_front_page_get",
+        "parameters": [
+          {
+            "name": "date",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "description": "Date `YYYY-MM-DD`, from 1900-01-01 to yesterday (São Paulo time).",
+              "examples": [
+                "1969-07-20"
+              ],
+              "title": "Date"
+            },
+            "description": "Date `YYYY-MM-DD`, from 1900-01-01 to yesterday (São Paulo time)."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FrontPage"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Invalid date or request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "External source unavailable.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Too many new pages.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/events": {
+      "get": {
+        "tags": [
+          "sections"
+        ],
+        "summary": "Get Events",
+        "operationId": "get_events_api_events_get",
+        "parameters": [
+          {
+            "name": "date",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "description": "Date `YYYY-MM-DD`, from 1900-01-01 to yesterday (São Paulo time).",
+              "examples": [
+                "1969-07-20"
+              ],
+              "title": "Date"
+            },
+            "description": "Date `YYYY-MM-DD`, from 1900-01-01 to yesterday (São Paulo time)."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Event"
+                  },
+                  "title": "Response Get Events Api Events Get"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Invalid date or request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "External source unavailable.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/births": {
+      "get": {
+        "tags": [
+          "sections"
+        ],
+        "summary": "Get Births",
+        "operationId": "get_births_api_births_get",
+        "parameters": [
+          {
+            "name": "date",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "description": "Date `YYYY-MM-DD`, from 1900-01-01 to yesterday (São Paulo time).",
+              "examples": [
+                "1969-07-20"
+              ],
+              "title": "Date"
+            },
+            "description": "Date `YYYY-MM-DD`, from 1900-01-01 to yesterday (São Paulo time)."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Birth"
+                  },
+                  "title": "Response Get Births Api Births Get"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Invalid date or request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "External source unavailable.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/deaths": {
+      "get": {
+        "tags": [
+          "sections"
+        ],
+        "summary": "Get Deaths",
+        "operationId": "get_deaths_api_deaths_get",
+        "parameters": [
+          {
+            "name": "date",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "description": "Date `YYYY-MM-DD`, from 1900-01-01 to yesterday (São Paulo time).",
+              "examples": [
+                "1969-07-20"
+              ],
+              "title": "Date"
+            },
+            "description": "Date `YYYY-MM-DD`, from 1900-01-01 to yesterday (São Paulo time)."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Birth"
+                  },
+                  "title": "Response Get Deaths Api Deaths Get"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Invalid date or request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "External source unavailable.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/cities": {
+      "get": {
+        "tags": [
+          "sections"
+        ],
+        "summary": "Get Cities",
+        "operationId": "get_cities_api_cities_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/City"
+                  },
+                  "type": "array",
+                  "title": "Response Get Cities Api Cities Get"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/cities/search": {
+      "get": {
+        "tags": [
+          "sections"
+        ],
+        "summary": "Search Cities",
+        "operationId": "search_cities_api_cities_search_get",
+        "parameters": [
+          {
+            "name": "q",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "description": "Part of the city name (2-60 letters).",
+              "title": "Q"
+            },
+            "description": "Part of the city name (2-60 letters)."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/City"
+                  },
+                  "title": "Response Search Cities Api Cities Search Get"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Invalid date or request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "External source unavailable.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/weather": {
+      "get": {
+        "tags": [
+          "sections"
+        ],
+        "summary": "Get Weather",
+        "operationId": "get_weather_api_weather_get",
+        "parameters": [
+          {
+            "name": "city",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "description": "Slug from /api/cities or /api/cities/search.",
+              "default": "rio-grande",
+              "title": "City"
+            },
+            "description": "Slug from /api/cities or /api/cities/search."
+          },
+          {
+            "name": "date",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "description": "Date `YYYY-MM-DD`, from 1900-01-01 to yesterday (São Paulo time).",
+              "examples": [
+                "1969-07-20"
+              ],
+              "title": "Date"
+            },
+            "description": "Date `YYYY-MM-DD`, from 1900-01-01 to yesterday (São Paulo time)."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Weather"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Invalid date or request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "External source unavailable.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/indicators": {
+      "get": {
+        "tags": [
+          "sections"
+        ],
+        "summary": "Get Indicators",
+        "operationId": "get_indicators_api_indicators_get",
+        "parameters": [
+          {
+            "name": "date",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "description": "Date `YYYY-MM-DD`, from 1900-01-01 to yesterday (São Paulo time).",
+              "examples": [
+                "1969-07-20"
+              ],
+              "title": "Date"
+            },
+            "description": "Date `YYYY-MM-DD`, from 1900-01-01 to yesterday (São Paulo time)."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Indicator"
+                  },
+                  "title": "Response Get Indicators Api Indicators Get"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Invalid date or request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "External source unavailable.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/exchange": {
+      "get": {
+        "tags": [
+          "sections"
+        ],
+        "summary": "Get Exchange Section",
+        "operationId": "get_exchange_section_api_exchange_get",
+        "parameters": [
+          {
+            "name": "date",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "description": "Date `YYYY-MM-DD`, from 1900-01-01 to yesterday (São Paulo time).",
+              "examples": [
+                "1969-07-20"
+              ],
+              "title": "Date"
+            },
+            "description": "Date `YYYY-MM-DD`, from 1900-01-01 to yesterday (São Paulo time)."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Exchange"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Invalid date or request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "External source unavailable.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/money": {
+      "get": {
+        "tags": [
+          "sections"
+        ],
+        "summary": "Get Money",
+        "operationId": "get_money_api_money_get",
+        "parameters": [
+          {
+            "name": "date",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "description": "Date `YYYY-MM-DD`, from 1900-01-01 to yesterday (São Paulo time).",
+              "examples": [
+                "1969-07-20"
+              ],
+              "title": "Date"
+            },
+            "description": "Date `YYYY-MM-DD`, from 1900-01-01 to yesterday (São Paulo time)."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Money"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Invalid date or request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "External source unavailable.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/editorial": {
+      "post": {
+        "tags": [
+          "sections"
+        ],
+        "summary": "Create Editorial",
+        "operationId": "create_editorial_api_editorial_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EditorialRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Editorial"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Invalid date or request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "External source unavailable.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Too many new editorials.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/health": {
+      "get": {
+        "tags": [
+          "health"
+        ],
+        "summary": "Get Health",
+        "operationId": "get_health_api_health_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Health"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "ApiError": {
+        "properties": {
+          "detail": {
+            "type": "string",
+            "title": "Detail",
+            "description": "Friendly pt-BR message, ready to show to the user."
+          },
+          "source": {
+            "anyOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "wikipedia",
+                  "nasa",
+                  "worldbank",
+                  "alphavantage",
+                  "ipeadata",
+                  "llm",
+                  "openmeteo"
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Source"
+          }
+        },
+        "type": "object",
+        "required": [
+          "detail"
+        ],
+        "title": "ApiError"
+      },
+      "Birth": {
+        "properties": {
+          "year": {
+            "type": "integer",
+            "title": "Year"
+          },
+          "text": {
+            "type": "string",
+            "title": "Text",
+            "description": "pt-BR, e.g. 'Ayrton Senna, piloto brasileiro.'"
+          },
+          "url": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Url"
+          },
+          "image_url": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Image Url"
+          },
+          "mentions_brazil": {
+            "type": "boolean",
+            "title": "Mentions Brazil",
+            "default": false
+          }
+        },
+        "type": "object",
+        "required": [
+          "year",
+          "text"
+        ],
+        "title": "Birth"
+      },
+      "City": {
+        "properties": {
+          "slug": {
+            "type": "string",
+            "title": "Slug",
+            "description": "Identifier used in `?city=`: a preset ('rio-grande') or 'geo-<id>' for a city found with /api/cities/search."
+          },
+          "name": {
+            "type": "string",
+            "title": "Name"
+          },
+          "state": {
+            "type": "string",
+            "title": "State",
+            "description": "State/region, e.g. 'RS' or 'Rio Grande do Sul'."
+          },
+          "country": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Country",
+            "description": "Country name in pt-BR (searched cities)."
+          }
+        },
+        "type": "object",
+        "required": [
+          "slug",
+          "name",
+          "state"
+        ],
+        "title": "City"
+      },
+      "Currency": {
+        "properties": {
+          "name": {
+            "type": "string",
+            "title": "Name",
+            "description": "pt-BR name, e.g. 'Cruzeiro Novo'."
+          },
+          "symbol": {
+            "type": "string",
+            "title": "Symbol",
+            "description": "E.g. 'NCr$'."
+          },
+          "start": {
+            "type": "string",
+            "format": "date",
+            "title": "Start"
+          },
+          "end": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "End"
+          }
+        },
+        "type": "object",
+        "required": [
+          "name",
+          "symbol",
+          "start"
+        ],
+        "title": "Currency"
+      },
+      "Editorial": {
+        "properties": {
+          "headlines": {
+            "items": {
+              "$ref": "#/components/schemas/Headline"
+            },
+            "type": "array",
+            "title": "Headlines"
+          },
+          "title": {
+            "type": "string",
+            "title": "Title",
+            "description": "Editorial title (pt-BR)."
+          },
+          "body": {
+            "type": "string",
+            "title": "Body",
+            "description": "Editorial in pt-BR, 2 to 4 paragraphs separated by a blank line."
+          },
+          "ai_generated": {
+            "type": "boolean",
+            "title": "Ai Generated",
+            "description": "False when the LLM failed and headlines were built from the raw event text."
+          },
+          "model": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Model",
+            "description": "Model that wrote it (e.g. anthropic/claude-haiku-5.5)."
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "headlines",
+          "title",
+          "body",
+          "ai_generated"
+        ],
+        "title": "Editorial"
+      },
+      "EditorialRequest": {
+        "properties": {
+          "date": {
+            "type": "string",
+            "format": "date",
+            "title": "Date"
+          }
+        },
+        "type": "object",
+        "required": [
+          "date"
+        ],
+        "title": "EditorialRequest"
+      },
+      "Event": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id",
+            "description": "Short id, stable within a front page (e.g. 'e3'); the LLM cites it."
+          },
+          "layer": {
+            "type": "string",
+            "enum": [
+              "day",
+              "month",
+              "on_this_day"
+            ],
+            "title": "Layer"
+          },
+          "year": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Year"
+          },
+          "date": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Date",
+            "description": "Exact date, when known."
+          },
+          "text": {
+            "type": "string",
+            "title": "Text"
+          },
+          "url": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Url",
+            "description": "Related Wikipedia article."
+          },
+          "image_url": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Image Url"
+          },
+          "mentions_brazil": {
+            "type": "boolean",
+            "title": "Mentions Brazil",
+            "default": false
+          },
+          "score": {
+            "type": "number",
+            "title": "Score",
+            "description": "Ranking weight (layer + bonuses).",
+            "default": 0
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "layer",
+          "text"
+        ],
+        "title": "Event"
+      },
+      "Exchange": {
+        "properties": {
+          "currency": {
+            "$ref": "#/components/schemas/Currency"
+          },
+          "usd_then": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Usd Then",
+            "description": "Value of US$ 1 at the time."
+          },
+          "usd_then_period": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Usd Then Period",
+            "description": "Rate period: 'YYYY-MM' or 'YYYY'."
+          },
+          "usd_then_source": {
+            "anyOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "alphavantage",
+                  "worldbank"
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Usd Then Source"
+          },
+          "usd_now": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Usd Now",
+            "description": "US$ 1 in reais, latest month (Alpha Vantage)."
+          },
+          "usd_now_period": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Usd Now Period"
+          },
+          "note": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Note",
+            "description": "pt-BR note shown under the numbers."
+          }
+        },
+        "type": "object",
+        "required": [
+          "currency"
+        ],
+        "title": "Exchange"
+      },
+      "FrontPage": {
+        "properties": {
+          "date": {
+            "type": "string",
+            "format": "date",
+            "title": "Date"
+          },
+          "issue_number": {
+            "type": "integer",
+            "title": "Issue Number",
+            "description": "Days since 1900-01-01, plus 1."
+          },
+          "events": {
+            "items": {
+              "$ref": "#/components/schemas/Event"
+            },
+            "type": "array",
+            "title": "Events"
+          },
+          "indicators": {
+            "items": {
+              "$ref": "#/components/schemas/Indicator"
+            },
+            "type": "array",
+            "title": "Indicators"
+          },
+          "exchange": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Exchange"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "editorial": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Editorial"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "births": {
+            "items": {
+              "$ref": "#/components/schemas/Birth"
+            },
+            "type": "array",
+            "title": "Births"
+          },
+          "deaths": {
+            "items": {
+              "$ref": "#/components/schemas/Birth"
+            },
+            "type": "array",
+            "title": "Deaths"
+          },
+          "money": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Money"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "sources": {
+            "items": {
+              "$ref": "#/components/schemas/SourceStatus"
+            },
+            "type": "array",
+            "title": "Sources"
+          },
+          "generated_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Generated At"
+          }
+        },
+        "type": "object",
+        "required": [
+          "date",
+          "issue_number",
+          "events",
+          "sources",
+          "generated_at"
+        ],
+        "title": "FrontPage"
+      },
+      "Headline": {
+        "properties": {
+          "title": {
+            "type": "string",
+            "title": "Title"
+          },
+          "subtitle": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Subtitle"
+          },
+          "event_id": {
+            "type": "string",
+            "title": "Event Id",
+            "description": "Must exist in `FrontPage.events`; otherwise it is dropped."
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "title",
+          "event_id"
+        ],
+        "title": "Headline"
+      },
+      "Health": {
+        "properties": {
+          "status": {
+            "type": "string",
+            "const": "ok",
+            "title": "Status"
+          },
+          "llm_model": {
+            "type": "string",
+            "title": "Llm Model"
+          },
+          "alphavantage_calls_left": {
+            "type": "integer",
+            "title": "Alphavantage Calls Left",
+            "description": "Alpha Vantage calls left today (our own cap)."
+          }
+        },
+        "type": "object",
+        "required": [
+          "status",
+          "llm_model",
+          "alphavantage_calls_left"
+        ],
+        "title": "Health"
+      },
+      "HourlyPoint": {
+        "properties": {
+          "hour": {
+            "type": "integer",
+            "title": "Hour",
+            "description": "0-23, local time (São Paulo)."
+          },
+          "temperature": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Temperature",
+            "description": "°C"
+          },
+          "precipitation": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Precipitation",
+            "description": "mm in the hour"
+          },
+          "humidity": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Humidity",
+            "description": "Relative humidity, %"
+          },
+          "wind": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Wind",
+            "description": "Wind speed at 10 m, km/h"
+          }
+        },
+        "type": "object",
+        "required": [
+          "hour"
+        ],
+        "title": "HourlyPoint"
+      },
+      "Indicator": {
+        "properties": {
+          "code": {
+            "type": "string",
+            "title": "Code",
+            "description": "World Bank code (e.g. SP.POP.TOTL)."
+          },
+          "name": {
+            "type": "string",
+            "title": "Name",
+            "description": "Short pt-BR name for display (e.g. 'População')."
+          },
+          "unit": {
+            "type": "string",
+            "title": "Unit",
+            "description": "Display unit in pt-BR (e.g. 'habitantes', '%', 'US$', 'anos')."
+          },
+          "then_year": {
+            "type": "integer",
+            "title": "Then Year"
+          },
+          "then_value": {
+            "type": "number",
+            "title": "Then Value"
+          },
+          "now_year": {
+            "type": "integer",
+            "title": "Now Year"
+          },
+          "now_value": {
+            "type": "number",
+            "title": "Now Value"
+          },
+          "series": {
+            "items": {
+              "$ref": "#/components/schemas/SeriesPoint"
+            },
+            "type": "array",
+            "title": "Series",
+            "description": "Yearly series for the sparkline."
+          }
+        },
+        "type": "object",
+        "required": [
+          "code",
+          "name",
+          "unit",
+          "then_year",
+          "then_value",
+          "now_year",
+          "now_value"
+        ],
+        "title": "Indicator"
+      },
+      "Money": {
+        "properties": {
+          "currency_symbol": {
+            "type": "string",
+            "title": "Currency Symbol",
+            "description": "Symbol of the currency of the time, e.g. 'Cr$'."
+          },
+          "period": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Period",
+            "description": "Month used for 'then', 'YYYY-MM'."
+          },
+          "min_wage_then": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Min Wage Then",
+            "description": "Minimum wage, in money of the time."
+          },
+          "min_wage_then_today": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Min Wage Then Today",
+            "description": "That minimum wage in today's reais (price-corrected)."
+          },
+          "min_wage_now": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Min Wage Now",
+            "description": "Current minimum wage in reais."
+          },
+          "amount_then": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Amount Then",
+            "description": "A round amount in money of the time (power of ten), e.g. 100."
+          },
+          "amount_today": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Amount Today",
+            "description": "`amount_then` in today's reais."
+          },
+          "today_period": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Today Period",
+            "description": "Month of today's prices, 'YYYY-MM'."
+          },
+          "note": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Note",
+            "description": "pt-BR note shown under the numbers."
+          }
+        },
+        "type": "object",
+        "required": [
+          "currency_symbol"
+        ],
+        "title": "Money"
+      },
+      "SeriesPoint": {
+        "properties": {
+          "year": {
+            "type": "integer",
+            "title": "Year"
+          },
+          "value": {
+            "type": "number",
+            "title": "Value"
+          }
+        },
+        "type": "object",
+        "required": [
+          "year",
+          "value"
+        ],
+        "title": "SeriesPoint"
+      },
+      "SourceStatus": {
+        "properties": {
+          "source": {
+            "type": "string",
+            "enum": [
+              "wikipedia",
+              "nasa",
+              "worldbank",
+              "alphavantage",
+              "ipeadata",
+              "llm",
+              "openmeteo"
+            ],
+            "title": "Source"
+          },
+          "ok": {
+            "type": "boolean",
+            "title": "Ok"
+          },
+          "cached": {
+            "type": "boolean",
+            "title": "Cached",
+            "description": "True if the answer came from the local cache.",
+            "default": false
+          },
+          "message": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Message",
+            "description": "Failure reason (pt-BR) when ok=False."
+          }
+        },
+        "type": "object",
+        "required": [
+          "source",
+          "ok"
+        ],
+        "title": "SourceStatus"
+      },
+      "Weather": {
+        "properties": {
+          "city": {
+            "$ref": "#/components/schemas/City"
+          },
+          "date": {
+            "type": "string",
+            "format": "date",
+            "title": "Date"
+          },
+          "temp_max": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Temp Max",
+            "description": "°C"
+          },
+          "temp_min": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Temp Min",
+            "description": "°C"
+          },
+          "precipitation_mm": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Precipitation Mm"
+          },
+          "wind_max_kmh": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Wind Max Kmh"
+          },
+          "weather_code": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Weather Code",
+            "description": "WMO weather code."
+          },
+          "description": {
+            "type": "string",
+            "title": "Description",
+            "description": "pt-BR summary of the weather code."
+          },
+          "hourly": {
+            "items": {
+              "$ref": "#/components/schemas/HourlyPoint"
+            },
+            "type": "array",
+            "title": "Hourly"
+          }
+        },
+        "type": "object",
+        "required": [
+          "city",
+          "date",
+          "description"
+        ],
+        "title": "Weather"
+      }
+    }
+  }
+}

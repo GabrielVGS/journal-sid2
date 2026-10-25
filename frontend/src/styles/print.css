@@ -1,0 +1,25 @@
+@media print {
+  @page {
+    size: A3;
+    margin: 12mm;
+  }
+  body {
+    background: white !important;
+  }
+  .no-print {
+    display: none !important;
+  }
+  article,
+  figure,
+  li {
+    break-inside: avoid;
+  }
+  h1,
+  h2,
+  h3 {
+    break-after: avoid;
+  }
+  .newspaper-photo {
+    filter: grayscale(1) !important;
+  }
+}

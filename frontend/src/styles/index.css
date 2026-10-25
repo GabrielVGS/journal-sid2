@@ -1,0 +1,45 @@
+@import 'tailwindcss';
+@import '@fontsource/playfair-display/700.css';
+@import '@fontsource/playfair-display/900.css';
+@import '@fontsource/playfair-display/700-italic.css';
+@import '@fontsource/libre-baskerville/400.css';
+@import '@fontsource/libre-baskerville/400-italic.css';
+@import '@fontsource/libre-baskerville/700.css';
+@import './print.css';
+
+@theme {
+  --font-display: 'Playfair Display', Georgia, serif;
+  --font-body: 'Libre Baskerville', Georgia, serif;
+  --color-paper: #f5f0e6;
+  --color-paper-dark: #e9e1d0;
+  --color-ink: #1c1a17;
+  --color-ink-soft: #57524a;
+  --color-accent: #8b1e1e;
+}
+
+@layer base {
+  body {
+    @apply bg-paper font-body text-ink antialiased;
+    background-image:
+      radial-gradient(circle at 20% 30%, rgb(0 0 0 / 0.025) 0 1px, transparent 1px),
+      radial-gradient(circle at 70% 80%, rgb(0 0 0 / 0.02) 0 1px, transparent 1px);
+    background-size:
+      7px 7px,
+      11px 11px;
+  }
+}
+
+@layer components {
+  .rule-double {
+    @apply border-y-4 border-double border-ink;
+  }
+  .section-title {
+    @apply mb-2 border-b border-ink pb-1 font-display text-sm font-bold tracking-[0.2em] uppercase;
+  }
+  .drop-cap::first-letter {
+    @apply float-left mt-1 mr-2 font-display text-6xl leading-[0.8] font-black;
+  }
+  .newspaper-photo {
+    @apply grayscale transition duration-500 hover:grayscale-0;
+  }
+}

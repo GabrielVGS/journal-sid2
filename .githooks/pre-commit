@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+# Barra commits com chaves de API e roda as checagens do projeto.
+set -euo pipefail
+
+padrao='sk-or-v1-[0-9a-f]{20,}|_API_KEY *= *[A-Za-z0-9_-]{12,}|postgres(ql)?://[^:/ ]+:[^@/ ]+@'
+if git diff --cached -U0 -- . ':!.env.example' | grep -E '^\+' | grep -E "$padrao" \
+  | grep -v -E '@(localhost|127\.0\.0\.1)[:/]' >/dev/null; then
+  echo "pre-commit: parece haver uma chave de API no commit. Use o .env." >&2
+  exit 1
+fi
+if git diff --cached --name-only | grep -E '(^|/)\.env$' >/dev/null; then
+  echo "pre-commit: .env não pode ser commitado." >&2
+  exit 1
+fi
+
+make check
